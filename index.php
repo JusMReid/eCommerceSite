@@ -1,3 +1,33 @@
+<?php
+  //require_once 'core/init.php';
+
+  // $servername = "localhost";
+  // $username = "root";
+  // $password = "";
+  //
+  // // Create connection
+  // $db = new mysqli($servername, $username, $password);
+  //
+  // if ($db->connect_error) {
+  //   die("Connection failed: " . $conn->connect_error);
+  // }
+  $serverName = "localhost";
+  $dbName = "cryptoShop";
+  $dbLogin= "root";
+  $dbPassword = "";
+
+  $db = mysqli_connect($serverName,$dbLogin, $dbPassword, $dbName);
+  // Check connection
+  if(mysqli_connect_error() ){
+    die("Could not connect to database...");
+  }
+
+  $sql = "SELECT * FROM products WHERE featured = 1";
+  $featured = $db->query($sql);
+
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,6 +66,26 @@
                       <li><a href="#">Accessories</a></li>
                     </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    id="text">Women <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Shirts</a></li>
+                      <li><a href="#">Pants</a></li>
+                      <li><a href="#">Shoes</a></li>
+                      <li><a href="#">Accessories</a></li>
+                    </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                    id="text">Kids <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Shirts</a></li>
+                      <li><a href="#">Pants</a></li>
+                      <li><a href="#">Shoes</a></li>
+                      <li><a href="#">Accessories</a></li>
+                    </ul>
+            </li>
           </ul>
         </div>
       </nav>
@@ -48,77 +98,23 @@
           <div class="row">
             <h2 class="text-center">Featured Products</h2>
 
-            <div class="col-md-3 item">
-              <h4>Levis Jeans</h4>
-              <img src="images/levisJeans.jpg" alt="Levis Jeans" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$24.99</s></p>
-              <p class="price">Our Price: $19.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-1">Details</button>
-            </div>
+            <?php
+              while($product = mysqli_fetch_assoc($featured)):
+
+
+             ?>
 
             <div class="col-md-3 item">
-              <h4>Adidas Football</h4>
-              <img src="images/adidasFootball.jpg" alt="Adidas Football" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$39.99</s></p>
-              <p class="price">Our Price: $29.99</p>
+              <h4><?= $product['title']; ?></h4></h4>
+              <img src="<?= $product['image']; ?>" alt="<?= $product['title']; ?>" class="anItem">
+              <p class="listPrice text-danger">List Price: <s>$<?= $product['price']; ?></s></p>
+              <p class="price">Our Price: $<?= $product['list_price']; ?></p>
               <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-2">Details</button>
+                data-target="#details-<?= $product['id']; ?>">Details</button>
             </div>
 
-            <div class="col-md-3 item">
-              <h4>Watch</h4>
-              <img src="images/gucciWatch.jpg" alt="Watch" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$20.99</s></p>
-              <p class="price">Our Price: $19.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-3">Details</button>
-            </div>
+          <?php endwhile; ?>
 
-            <div class="col-md-3 item">
-              <h4>Polo Shirt</h4>
-              <img src="images/poloShirt.jpg" alt="Polo Shirt" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$54.99</s></p>
-              <p class="price">Our Price: $19.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-4">Details</button>
-            </div>
-
-            <div class="col-md-3 item">
-              <h4>Joggers</h4>
-              <img src="images/joggers.jpg" alt="Joggers" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$62.99</s></p>
-              <p class="price">Our Price: $54.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-5">Details</button>
-            </div>
-
-            <div class="col-md-3 item">
-              <h4>Purse</h4>
-              <img src="images/purse.jpg" alt="Purse" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$66.99</s></p>
-              <p class="price">Our Price: $61.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-6">Details</button>
-            </div>
-
-            <div class="col-md-3 item">
-              <h4>Hoodie</h4>
-              <img src="images/hoodie.jpg" alt="Hoodie" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$27.99</s></p>
-              <p class="price">Our Price: $19.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-7">Details</button>
-            </div>
-
-            <div class="col-md-3 item">
-              <h4>Head Band</h4>
-              <img src="images/headband.jpg" alt="Head Band" class="anItem">
-              <p class="listPrice text-danger">List Price: <s>$9.99</s></p>
-              <p class="price">Our Price: $5.99</p>
-              <button type="button" class="btn btn-success" data-toggle="modal"
-                data-target="#details-8">Details</button>
-            </div>
           </div>
 
           <footer class="text-center" id="footer">&copy; Copyright 2018 CryptoShop</footer>
@@ -129,14 +125,15 @@
 
 
     <!-- DETAILS MODAL -->
-    <?php include 'details-modal-levisJeans.php';
-          include 'details-modal-football.php';
-          include 'details-modal-watch.php';
-          include 'details-modal-headband.php';
-          include 'details-modal-hoodie.php';
-          include 'details-modal-joggers.php';
-          include 'details-modal-purse.php';
-          include 'details-modal-poloshirt.php';
+    <?php
+        include 'details-modal-levisJeans.php';
+        include 'details-modal-football.php';
+        include 'details-modal-watch.php';
+        include 'details-modal-headband.php';
+        include 'details-modal-hoodie.php';
+        include 'details-modal-joggers.php';
+        include 'details-modal-purse.php';
+        include 'details-modal-poloshirt.php';
     ?>
 
     <!-- END OF DETAILS MODAL -->

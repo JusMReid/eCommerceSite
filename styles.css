@@ -13,6 +13,10 @@ body{
   color: white;
 }
 
+.anItem{
+  width: auto;
+  height: 200px;
+}
 
 footer{
   margin-top: 20px;
@@ -20,11 +24,17 @@ footer{
   background-color:  #800000;
 }
 
-#anItem{
-  width: 200px;
-  height: 200px;
-}
-
 #quantity, #quantity-label{
   margin-left: -16px;
+}
+
+img.details{
+  width: auto;
+  height: 200px;
+  margin: 15px auto;
+}
+
+li{
+  border: 2px solid white;
+  margin-left: 3px;
 }
