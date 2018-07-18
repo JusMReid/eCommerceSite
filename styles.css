@@ -13,12 +13,18 @@ body{
   color: white;
 }
 
-.otherRow{
-  margin-top: 40px;
-}
 
 footer{
   margin-top: 20px;
   color: white;
   background-color:  #800000;
+}
+
+#anItem{
+  width: 200px;
+  height: 200px;
+}
+
+#quantity, #quantity-label{
+  margin-left: -16px;
 }
